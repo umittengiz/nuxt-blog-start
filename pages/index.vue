@@ -1,7 +1,11 @@
 <script setup>
 let page = 1;
 let perPage = 9;
-const { data: posts } = await useFetch(`https://heytripster.com/wp-json/wp/v2/posts?page=${page}&per_page=${perPage}&_fields=id,title.rendered,yoast_head_json.og_image,content.rendered,slug`);
+const { data: posts } = await useFetch(`https://heytripster.com/wp-json/wp/v2/posts?page=${page}&per_page=${perPage}&_fields=id,title,yoast_head_json.og_image,content,slug`, {
+  headers: {
+    "Content-Type": "application/json"
+  }
+});
 
 
 // const { data: posts } = await useFetch(`https://heytripster.com/wp-json/wp/v2/posts?page=${page}&per_page=${perPage}&_fields=id,title.rendered,yoast_head_json.og_image,content.rendered,slug`)
@@ -36,8 +40,6 @@ const { data: posts } = await useFetch(`https://heytripster.com/wp-json/wp/v2/po
                 </NuxtLink>
               </li>
             </ul>
-
-            <NuxtLink :to="'/page/'+(page+1)">Next Page</NuxtLink>
 
             <div class="hidden flex flex-wrap mt-10 overflow-hidden">
               <!-- <div class="w-full overflow-hidden md:w-4/6 lg:w-4/6 xl:w-4/6">

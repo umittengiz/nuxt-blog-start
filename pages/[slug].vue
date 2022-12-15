@@ -1,7 +1,11 @@
 <script setup>
 let route = useRoute();
 let slug = route.params.slug;
-const { data: post } = await useFetch("https://heytripster.com/wp-json/wp/v2/posts?slug=" + slug + "&_fields=id,title.rendered,yoast_head_json.og_image,content.rendered,slug");
+const { data: post } = await useFetch("https://heytripster.com/wp-json/wp/v2/posts?slug=" + slug + "&_fields=id,title,yoast_head_json.og_image,content,slug", {
+  headers: {
+    "Content-Type": "application/json"
+  }
+});
 </script>
 
 <template>
@@ -40,8 +44,6 @@ const { data: post } = await useFetch("https://heytripster.com/wp-json/wp/v2/pos
 
       </div>
     </main>
-
-    <NuxtLink :to="'/page/'+(page+1)">Next Page</NuxtLink>
 
   </div>
 
