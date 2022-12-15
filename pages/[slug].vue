@@ -1,4 +1,5 @@
 <script setup>
+let router = useRouter();
 let route = useRoute();
 let slug = route.params.slug;
 const { data: post } = await useFetch("https://heytripster.com/wp-json/wp/v2/posts?slug=" + slug + "&_fields=id,title,yoast_head_json.og_image,content,slug", {
@@ -10,7 +11,7 @@ const { data: post } = await useFetch("https://heytripster.com/wp-json/wp/v2/pos
 
 <template>
   <!-- <p>{{ $route.params.slug }}</p> -->
-  <div class="sticky top-0"><NuxtLink to="/">← Home page</NuxtLink></div>
+  <div class="sticky top-0"><button @click="router.back()">← Home page</button></div>
 
   <div class="max-w-screen-xl mx-auto">
     <main class="mt-10">
